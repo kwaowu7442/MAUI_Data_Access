@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:MAUI_Data_Acces.Models"
+             x:Class="MAUI_Data_Acces.MainPage">
+
+    <VerticalStackLayout Padding="30,0" Spacing="25">
+        <Label Text="kwadwo - Local Storage"
+               Style="{StaticResource Headline}"
+               SemanticProperties.HeadingLevel="Level1" />
+
+        <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+            <Label Grid.Row="0" Grid.Column="0" Text="First Name:"
+                   Style="{StaticResource SubHeadline}"
+                   VerticalTextAlignment="Center"
+                   SemanticProperties.HeadingLevel="Level2" />
+            <Entry x:Name="txtFirstName" Grid.Row="0" Grid.Column="1"
+                   Placeholder="Enter your first name" />
+
+            <Label Grid.Row="1" Grid.Column="0" Text="Last Name:"
+                   Style="{StaticResource SubHeadline}"
+                   VerticalTextAlignment="Center"
+                   SemanticProperties.HeadingLevel="Level2" />
+            <Entry x:Name="txtLastName" Grid.Row="1" Grid.Column="1"
+                   Placeholder="Enter your last name" />
+
+            <Label Grid.Row="2" Grid.Column="0" Text="Date of Birth:"
+                   Style="{StaticResource SubHeadline}"
+                   VerticalTextAlignment="Center"
+                   SemanticProperties.HeadingLevel="Level2" />
+            <DatePicker x:Name="dpDateOfBirth" Grid.Row="2" Grid.Column="1"
+                        Format="MM-dd-yyyy" />
+        </Grid>
+
+        <Button x:Name="btnSave" Text="Save Person"
+                Clicked="OnSaveClicked"
+                HorizontalOptions="Center" />
+
+        <CollectionView VerticalOptions="Fill"
+                        ItemsSource="{Binding People}"
+                        SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Person">
+                    <Grid ColumnDefinitions="*,*,Auto" Padding="20">
+                        <Label Text="{Binding FirstName}" VerticalTextAlignment="Center" />
+                        <Label Grid.Column="1" Text="{Binding LastName}" VerticalTextAlignment="Center" />
+                        <Label Grid.Column="2" Text="{Binding DateOfBirth, StringFormat='{0:MM-dd-yyyy}'}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>
